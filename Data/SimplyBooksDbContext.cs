@@ -1,19 +1,21 @@
 using Microsoft.EntityFrameworkCore;
-using SimplyBooks.Data;
 using SimplyBooks.Models;
 
-public class SimplyBooksDbContext : DbContext
+namespace SimplyBooks.Data
 {
-  public DbSet<Author> Authors { get; set; }
-  public DbSet<Book> Books { get; set; }
-  public DbSet<User> Users { get; set; }
-
-  public SimplyBooksDbContext(DbContextOptions<SimplyBooksDbContext> context) : base(context) { }
-
-  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  public class SimplyBooksDbContext : DbContext
   {
-    modelBuilder.Entity<Author>().HasData(AuthorData.Authors);
-    modelBuilder.Entity<Book>().HasData(BookData.Books);
-    modelBuilder.Entity<User>().HasData(UserData.Users);
+    public DbSet<Author> Authors { get; set; }
+    public DbSet<Book> Books { get; set; }
+    public DbSet<User> Users { get; set; }
+
+    public SimplyBooksDbContext(DbContextOptions<SimplyBooksDbContext> context) : base(context) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+      modelBuilder.Entity<Author>().HasData(AuthorData.Authors);
+      modelBuilder.Entity<Book>().HasData(BookData.Books);
+      modelBuilder.Entity<User>().HasData(UserData.Users);
+    }
   }
 }
