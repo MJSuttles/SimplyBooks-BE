@@ -2,6 +2,8 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
 using SimplyBooks.Data;
 using SimplyBooks.Interfaces;
+using SimplyBooks.Repositories;
+using SimplyBooks.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +16,10 @@ builder.Services.AddNpgsql<SimplyBooksDbContext>(builder.Configuration["SimplyBo
 // Set the JSON serializer options
 builder.Services.Configure<JsonOptions>(options => { options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });
 
-// builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-// builder.Services.AddScoped<I
+builder.Services.AddScoped<ISimplyBooksAuthorRepository, SimplyBooksAuthorRepository>();
+builder.Services.AddScoped<ISimplyBooksAuthorService, SimplyBooksAuthorService>();
+builder.Services.AddScoped<ISimplyBooksBookRepository, SimplyBooksBookRepository>();
+builder.Services.AddScoped<ISimplyBooksBookService, SimplyBooksBookService>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

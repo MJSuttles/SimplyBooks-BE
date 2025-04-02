@@ -1,6 +1,6 @@
 using SimplyBooks.Models;
 
-namespace SimplyBooks.Interface
+namespace SimplyBooks.Interfaces
 {
   public interface ISimplyBooksAuthorService
   {
