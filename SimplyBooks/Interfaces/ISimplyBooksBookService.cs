@@ -2,7 +2,7 @@ using SimplyBooks.Models;
 
 namespace SimplyBooks.Interfaces
 {
-  public interface IBookService
+  public interface ISimplyBooksBookService
   {
     // insert data
   }
