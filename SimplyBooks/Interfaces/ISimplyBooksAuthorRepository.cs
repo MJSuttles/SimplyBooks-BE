@@ -2,7 +2,7 @@ using SimplyBooks.Models;
 
 namespace SimplyBooks.Interfaces
 {
-  public interface IAuthorRepository
+  public interface ISimplyBooksAuthorRepository
   {
     // insert data
   }
