@@ -20,6 +20,22 @@ namespace SimplyBooks.Repositories
       _context = context;
     }
 
-    // insert Tasks 
+    // Get all books
+
+
+
+    // Get all books by user
+
+
+
+    // Get a single book with author details
+
+
+
+    // Create a Book
+
+
+
+    // Update a Book
   }
 }

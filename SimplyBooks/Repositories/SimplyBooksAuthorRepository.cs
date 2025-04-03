@@ -20,6 +20,41 @@ namespace SimplyBooks.Repositories
       _context = context;
     }
 
-    // insert Tasks
+    // Get authors
+    public async Task<List<Author>> GetAllAuthorsAsync()
+    {
+      return await _context.Authors.ToListAsync();
+    }
+
+    // Get authors by user
+    public async Task<List<Author>> GetAuthorsByUserAsync(int userId)
+    {
+      return await _context.Authors
+              .Where(a => a.UserId == userId)
+              .Include(a => a.Books)
+              .ToListAsync();
+    }
+
+    // Get a single author with his/her books
+
+    public async Task<List<Author?>> GetAuthorWithBooksAsync(int authorId)
+    {
+      return await _context.Authors
+          .Include(a => a.Books)
+          .SingleOrDefaultAsync(a => a.Id == authorId);
+    }
+
+    //   return Results.Ok(author);
+    // };
+
+    // Create an author
+
+
+
+    // Update an author
+
+
+
+    // Delete an author and his/her books
   }
 }
