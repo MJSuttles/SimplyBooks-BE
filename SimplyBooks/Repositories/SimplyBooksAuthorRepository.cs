@@ -37,7 +37,7 @@ namespace SimplyBooks.Repositories
 
     // Get a single author with his/her books
 
-    public async Task<List<Author?>> GetAuthorWithBooksAsync(int authorId)
+    public async Task<Author?> GetAuthorWithBooksAsync(int authorId)
     {
       return await _context.Authors
           .Include(a => a.Books)

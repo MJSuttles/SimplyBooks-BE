@@ -32,6 +32,21 @@ namespace SimplyBooks.Services
     // Task<T> is a task that returns a value.
     // To get the value, we use the await keyword.
 
-    // insert Task<Author>
+    public async Task<List<Author>> GetAllAuthorsAsync()
+    {
+      return await _simplyBooksAuthorRepository.GetAllAuthorsAsync();
+    }
+
+    public async Task<List<Author>> GetAuthorsByUserAsync(int userId)
+    {
+      return await _simplyBooksAuthorRepository.GetAuthorsByUserAsync(userId);
+    }
+
+    public async Task<Author?> GetAuthorWithBooksAsync(int authorId)
+    {
+      return await _simplyBooksAuthorRepository.GetAuthorWithBooksAsync(authorId);
+    }
+
+
   }
 }

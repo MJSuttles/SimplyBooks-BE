@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnablelegacyTimestampBehavior", true);
 
 // allows our api endpoints to access the data through Entity Framework Configure
-builder.Services.AddNpgsql<SimplyBooksDbContext>(builder.Configuration["SimplyBooksDbContextConnectionString"]);
+builder.Services.AddNpgsql<SimplyBooksDbContext>(builder.Configuration["SimplyBooks-BEConnectionString"]);
 
 // Set the JSON serializer options
 builder.Services.Configure<JsonOptions>(options => { options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });

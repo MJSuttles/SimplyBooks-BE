@@ -13,6 +13,11 @@ namespace SimplyBooks.Data
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      modelBuilder.Entity<Author>()
+        .HasMany(a => a.Books)
+        .WithOne(b => b.Author)
+        .HasForeignKey(b => b.AuthorId);
+
       modelBuilder.Entity<Author>().HasData(AuthorData.Authors);
       modelBuilder.Entity<Book>().HasData(BookData.Books);
       modelBuilder.Entity<User>().HasData(UserData.Users);

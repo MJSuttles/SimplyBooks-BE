@@ -17,7 +17,7 @@ namespace SimplyBooks.Endpoint
     {
       var group = routes.MapGroup("/api/books").WithTags(nameof(Book));
 
-      // insert Books API calls
+      // insert Book API Calls
     }
   }
 }
