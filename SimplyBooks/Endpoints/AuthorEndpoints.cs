@@ -36,7 +36,7 @@ namespace SimplyBooks.Endpoint
       .WithOpenApi()
       .Produces<List<Author>>(StatusCodes.Status200OK);
 
-      group.MapGet("/authors-with-books", async (int authorId, ISimplyBooksAuthorService simplyBooksAuthorService) =>
+      group.MapGet("/author-with-books", async (int authorId, ISimplyBooksAuthorService simplyBooksAuthorService) =>
       {
         return await simplyBooksAuthorService.GetAuthorWithBooksAsync(authorId);
       })

@@ -39,7 +39,12 @@ namespace SimplyBooks.Repositories
 
     // Get a single book with author details
 
-
+    public async Task<Book?> GetBookWithAuthorDetailsAsync(int id)
+    {
+      return await _context.Books
+        .Include(b => b.Author)
+        .SingleOrDefaultAsync(b => b.Id == id);
+    }
 
     // Create a Book
 
