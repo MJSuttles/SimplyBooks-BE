@@ -1,5 +1,6 @@
 using SimplyBooks.Interfaces;
 using SimplyBooks.Models;
+using SimplyBooks.Repositories;
 
 namespace SimplyBooks.Services
 {
@@ -31,6 +32,13 @@ namespace SimplyBooks.Services
     // Task<T> is a task that returns a value.
     // To get the value, we use the await keyword.
 
-    // insert Task<Book>
+    public async Task<List<Book>> GetAllBooksAsync()
+    {
+      return await _simplyBooksBookRepository.GetAllBooksAsync();
+    }
+
+
+
+
   }
 }

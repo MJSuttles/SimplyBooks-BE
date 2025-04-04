@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using SimplyBooks.Interfaces;
 using SimplyBooks.Models;
+using SimplyBooks.Services;
 
 namespace SimplyBooks.Endpoint
 {
@@ -17,7 +18,17 @@ namespace SimplyBooks.Endpoint
     {
       var group = routes.MapGroup("/api/books").WithTags(nameof(Book));
 
-      // insert Book API Calls
+      group.MapGet("/", async (ISimplyBooksBookService simplyBooksBookService) =>
+      {
+        return await simplyBooksBookService.GetAllBooksAsync();
+      })
+      .WithName("GetAllBooks")
+      .WithOpenApi()
+      .Produces<List<Book>>(StatusCodes.Status200OK);
+
+
+
+
     }
   }
 }

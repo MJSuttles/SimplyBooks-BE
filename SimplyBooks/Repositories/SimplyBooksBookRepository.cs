@@ -22,7 +22,10 @@ namespace SimplyBooks.Repositories
 
     // Get all books
 
-
+    public async Task<List<Book>> GetAllBooksAsync()
+    {
+      return await _context.Books.ToListAsync();
+    }
 
     // Get all books by user
 

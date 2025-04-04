@@ -4,6 +4,6 @@ namespace SimplyBooks.Interfaces
 {
   public interface ISimplyBooksBookRepository
   {
-    // insert data
+    Task<List<Book>> GetAllBooksAsync();
   }
 }
