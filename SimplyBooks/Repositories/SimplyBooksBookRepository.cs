@@ -29,7 +29,13 @@ namespace SimplyBooks.Repositories
 
     // Get all books by user
 
-
+    public async Task<List<Book>> GetBooksByUserAsync(int userId)
+    {
+      return await _context.Books
+        .Where(b => b.UserId == userId)
+        .Include(b => b.Author)
+        .ToListAsync();
+    }
 
     // Get a single book with author details
 

@@ -37,7 +37,10 @@ namespace SimplyBooks.Services
       return await _simplyBooksBookRepository.GetAllBooksAsync();
     }
 
-
+    public async Task<List<Book>> GetBooksByUserAsync(int userId)
+    {
+      return await _simplyBooksBookRepository.GetBooksByUserAsync(userId);
+    }
 
 
   }

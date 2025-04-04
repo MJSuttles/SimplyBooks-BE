@@ -26,7 +26,13 @@ namespace SimplyBooks.Endpoint
       .WithOpenApi()
       .Produces<List<Book>>(StatusCodes.Status200OK);
 
-
+      group.MapGet("/{userId}", async (int userId, ISimplyBooksBookService simplyBooksBookService) =>
+      {
+        return await simplyBooksBookService.GetBooksByUserAsync(userId);
+      })
+      .WithName("GetBooksByUser")
+      .WithOpenApi()
+      .Produces<List<Book>>(StatusCodes.Status200OK);
 
 
     }
