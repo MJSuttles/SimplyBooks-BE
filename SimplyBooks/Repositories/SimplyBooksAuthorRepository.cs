@@ -1,7 +1,9 @@
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.EntityFrameworkCore;
 using SimplyBooks.Data;
 using SimplyBooks.Interfaces;
 using SimplyBooks.Models;
+using SimplyBooks.Services;
 
 namespace SimplyBooks.Repositories
 {
@@ -55,7 +57,21 @@ namespace SimplyBooks.Repositories
 
     // Update an author
 
-
+    public async Task<Author> UpdateAuthorAsync(int id, Author author)
+    {
+      var existingAuthor = await _context.Authors.FindAsync(id);
+      if (existingAuthor == null)
+      {
+        return null;
+      }
+      existingAuthor.FirstName = author.FirstName;
+      existingAuthor.LastName = author.LastName;
+      existingAuthor.Email = author.Email;
+      existingAuthor.Image = author.Image;
+      existingAuthor.Favorite = author.Favorite;
+      await _context.SaveChangesAsync();
+      return author;
+    }
 
     // Delete an author and his/her books
   }

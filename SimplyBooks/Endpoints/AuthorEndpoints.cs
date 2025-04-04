@@ -53,6 +53,18 @@ namespace SimplyBooks.Endpoint
       .WithOpenApi()
       .Produces<Author>(StatusCodes.Status201Created)
       .Produces(StatusCodes.Status400BadRequest);
+
+      group.MapPut("/{id}", async (ISimplyBooksAuthorService simplyBooksAuthorService, int id, Author author) =>
+      {
+        var updatedAuthor = await simplyBooksAuthorService.UpdateAuthorAsync(id, author);
+        return Results.Ok(updatedAuthor);
+      })
+      .WithName("UpdateAuthor")
+      .WithOpenApi()
+      .Produces<Author>(StatusCodes.Status201Created)
+      .Produces(StatusCodes.Status400BadRequest);
+
+
     }
   }
 }
