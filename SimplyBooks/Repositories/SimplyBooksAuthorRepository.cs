@@ -44,12 +44,14 @@ namespace SimplyBooks.Repositories
           .SingleOrDefaultAsync(a => a.Id == authorId);
     }
 
-    //   return Results.Ok(author);
-    // };
-
     // Create an author
 
-
+    public async Task<Author> CreateAuthorAsync(Author author)
+    {
+      _context.Authors.Add(author);
+      await _context.SaveChangesAsync();
+      return author;
+    }
 
     // Update an author
 

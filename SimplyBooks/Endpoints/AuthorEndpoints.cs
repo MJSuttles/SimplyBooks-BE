@@ -1,3 +1,5 @@
+using System.Reflection.Metadata.Ecma335;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using SimplyBooks.Interfaces;
 using SimplyBooks.Models;
@@ -26,23 +28,31 @@ namespace SimplyBooks.Endpoint
       .WithOpenApi()
       .Produces<List<Author>>(StatusCodes.Status200OK);
 
-      group.MapGet("/{userId}", async (int userId, ISimplyBooksAuthorRepository simplyBooksAuthorRepository) =>
+      group.MapGet("/{userId}", async (int userId, ISimplyBooksAuthorService simplyBooksAuthorService) =>
       {
-        return await simplyBooksAuthorRepository.GetAuthorsByUserAsync(userId);
+        return await simplyBooksAuthorService.GetAuthorsByUserAsync(userId);
       })
       .WithName("GetAuthorsByUser")
       .WithOpenApi()
       .Produces<List<Author>>(StatusCodes.Status200OK);
 
-      group.MapGet("/authors-with-books", async (int authorId, ISimplyBooksAuthorRepository simplyBooksAuthorRepository) =>
+      group.MapGet("/authors-with-books", async (int authorId, ISimplyBooksAuthorService simplyBooksAuthorService) =>
       {
-        return await simplyBooksAuthorRepository.GetAuthorWithBooksAsync(authorId);
+        return await simplyBooksAuthorService.GetAuthorWithBooksAsync(authorId);
       })
       .WithName("GetAuthorsWithBooks")
       .WithOpenApi()
       .Produces<Author?>(StatusCodes.Status200OK);
+
+      group.MapPost("/", async (ISimplyBooksAuthorService simplyBooksAuthorService, Author author) =>
+      {
+        var createdAuthor = await simplyBooksAuthorService.CreateAuthorAsync(author);
+        return Results.Created($"/api/authors/{createdAuthor.Id}", author);
+      })
+      .WithName("CreatedAuthor")
+      .WithOpenApi()
+      .Produces<Author>(StatusCodes.Status201Created)
+      .Produces(StatusCodes.Status400BadRequest);
     }
-
-
   }
 }

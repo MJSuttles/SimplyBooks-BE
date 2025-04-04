@@ -47,6 +47,9 @@ namespace SimplyBooks.Services
       return await _simplyBooksAuthorRepository.GetAuthorWithBooksAsync(authorId);
     }
 
-
+    public async Task<Author> CreateAuthorAsync(Author author)
+    {
+      return await _simplyBooksAuthorRepository.CreateAuthorAsync(author);
+    }
   }
 }
