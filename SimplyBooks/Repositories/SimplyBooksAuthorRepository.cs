@@ -74,5 +74,24 @@ namespace SimplyBooks.Repositories
     }
 
     // Delete an author and his/her books
+
+    public async Task<Author?> DeleteAuthorWithBooksAsync(int authorId)
+    {
+      var authorToDelete = await _context.Authors
+        .Include(a => a.Books)
+        .SingleOrDefaultAsync(a => a.Id == authorId);
+
+      if (authorToDelete == null)
+      {
+        return null;
+      }
+
+      _context.Authors.Remove(authorToDelete);
+      await _context.SaveChangesAsync();
+
+      return authorToDelete;
+
+
+    }
   }
 }

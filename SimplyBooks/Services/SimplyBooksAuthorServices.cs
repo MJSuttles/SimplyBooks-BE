@@ -57,6 +57,9 @@ namespace SimplyBooks.Services
       return await _simplyBooksAuthorRepository.UpdateAuthorAsync(id, author);
     }
 
-
+    public async Task<Author?> DeleteAuthorWithBooksAsync(int authorId)
+    {
+      return await _simplyBooksAuthorRepository.DeleteAuthorWithBooksAsync(authorId);
+    }
   }
 }

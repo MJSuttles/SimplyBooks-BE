@@ -64,7 +64,14 @@ namespace SimplyBooks.Endpoint
       .Produces<Author>(StatusCodes.Status201Created)
       .Produces(StatusCodes.Status400BadRequest);
 
-
+      group.MapDelete("/{authorId}", async (ISimplyBooksAuthorService simplyBooksAuthorService, int authorId) =>
+      {
+        var deletedAuthor = await simplyBooksAuthorService.DeleteAuthorWithBooksAsync(authorId);
+        return Results.NoContent();
+      })
+      .WithName("DeletedAuthor")
+      .WithOpenApi()
+      .Produces<Author>(StatusCodes.Status204NoContent);
     }
   }
 }
