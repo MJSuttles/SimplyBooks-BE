@@ -7,5 +7,6 @@ namespace SimplyBooks.Interfaces
     Task<List<Book>> GetAllBooksAsync();
     Task<List<Book>> GetBooksByUserAsync(int userId);
     Task<Book?> GetBookWithAuthorDetailsAsync(int id);
+    Task<Book> CreateBookAsync(Book book);
   }
 }

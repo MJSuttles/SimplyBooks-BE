@@ -48,8 +48,17 @@ namespace SimplyBooks.Repositories
 
     // Create a Book
 
-
+    public async Task<Book> CreateBookAsync(Book book)
+    {
+      _context.Books.Add(book);
+      await _context.SaveChangesAsync();
+      return book;
+    }
 
     // Update a Book
+
+
+
+    // Delete a Book
   }
 }

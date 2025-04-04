@@ -42,6 +42,16 @@ namespace SimplyBooks.Endpoint
       .WithOpenApi()
       .Produces<Book?>(StatusCodes.Status200OK);
 
+      group.MapPut("/", async (ISimplyBooksBookService simplyBooksBookSerivce, Book book) =>
+      {
+        var createdBook = await simplyBooksBookSerivce.CreateBookAsync(book);
+        return Results.Created($"/books/{createdBook.Id}", book);
+      })
+      .WithName("CreateBook")
+      .WithOpenApi()
+      .Produces<Book>(StatusCodes.Status201Created)
+      .Produces<Book>(StatusCodes.Status400BadRequest);
+
 
     }
   }
