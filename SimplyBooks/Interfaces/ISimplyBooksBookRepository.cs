@@ -4,6 +4,11 @@ namespace SimplyBooks.Interfaces
 {
   public interface ISimplyBooksBookRepository
   {
-    // insert data
+    Task<List<Book>> GetAllBooksAsync();
+    Task<List<Book>> GetBooksByUserAsync(int userId);
+    Task<Book?> GetBookWithAuthorDetailsAsync(int id);
+    Task<Book> CreateBookAsync(Book book);
+    Task<Book> UpdateBookAsync(int id, Book book);
+    Task<Book> DeleteBookAsync(int id);
   }
 }

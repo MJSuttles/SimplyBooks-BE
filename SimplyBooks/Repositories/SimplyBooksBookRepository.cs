@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.EntityFrameworkCore;
 using SimplyBooks.Data;
 using SimplyBooks.Interfaces;
@@ -20,6 +21,74 @@ namespace SimplyBooks.Repositories
       _context = context;
     }
 
-    // insert Tasks 
+    // Get all books
+
+    public async Task<List<Book>> GetAllBooksAsync()
+    {
+      return await _context.Books.ToListAsync();
+    }
+
+    // Get all books by user
+
+    public async Task<List<Book>> GetBooksByUserAsync(int userId)
+    {
+      return await _context.Books
+        .Where(b => b.UserId == userId)
+        .Include(b => b.Author)
+        .ToListAsync();
+    }
+
+    // Get a single book with author details
+
+    public async Task<Book?> GetBookWithAuthorDetailsAsync(int id)
+    {
+      return await _context.Books
+        .Include(b => b.Author)
+        .SingleOrDefaultAsync(b => b.Id == id);
+    }
+
+    // Create a Book
+
+    public async Task<Book> CreateBookAsync(Book book)
+    {
+      _context.Books.Add(book);
+      await _context.SaveChangesAsync();
+      return book;
+    }
+
+    // Update a Book
+
+    public async Task<Book> UpdateBookAsync(int id, Book book)
+    {
+      var existingBook = await _context.Books.FindAsync(id);
+      if (existingBook == null)
+      {
+        return null;
+      }
+      existingBook.Title = book.Title;
+      existingBook.Description = book.Description;
+      existingBook.Image = book.Image;
+      existingBook.Price = book.Price;
+      existingBook.Sale = book.Sale;
+      await _context.SaveChangesAsync();
+      return book;
+    }
+
+    // Delete a Book
+
+    public async Task<Book> DeleteBookAsync(int id)
+    {
+      var bookToDelete = await _context.Books
+        .SingleOrDefaultAsync(b => b.Id == id);
+
+      if (bookToDelete == null)
+      {
+        return null;
+      }
+      _context.Books.Remove(bookToDelete);
+      await _context.SaveChangesAsync();
+
+      return bookToDelete;
+    }
   }
 }
