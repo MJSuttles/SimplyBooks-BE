@@ -57,7 +57,21 @@ namespace SimplyBooks.Repositories
 
     // Update a Book
 
-
+    public async Task<Book> UpdateBookAsync(int id, Book book)
+    {
+      var existingBook = await _context.Books.FindAsync(id);
+      if (existingBook == null)
+      {
+        return null;
+      }
+      existingBook.Title = book.Title;
+      existingBook.Description = book.Description;
+      existingBook.Image = book.Image;
+      existingBook.Price = book.Price;
+      existingBook.Sale = book.Sale;
+      await _context.SaveChangesAsync();
+      return book;
+    }
 
     // Delete a Book
   }

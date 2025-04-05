@@ -42,7 +42,7 @@ namespace SimplyBooks.Endpoint
       .WithOpenApi()
       .Produces<Book?>(StatusCodes.Status200OK);
 
-      group.MapPut("/", async (ISimplyBooksBookService simplyBooksBookSerivce, Book book) =>
+      group.MapPost("/", async (ISimplyBooksBookService simplyBooksBookSerivce, Book book) =>
       {
         var createdBook = await simplyBooksBookSerivce.CreateBookAsync(book);
         return Results.Created($"/books/{createdBook.Id}", book);
@@ -52,7 +52,15 @@ namespace SimplyBooks.Endpoint
       .Produces<Book>(StatusCodes.Status201Created)
       .Produces<Book>(StatusCodes.Status400BadRequest);
 
-
+      group.MapPut("/{id}", async (ISimplyBooksBookRepository simplyBooksBookRepository, int id, Book book) =>
+      {
+        var updatedBook = await simplyBooksBookRepository.UpdateBookAsync(id, book);
+        return Results.Ok(updatedBook);
+      })
+      .WithName("UpdateBook")
+      .WithOpenApi()
+      .Produces<Book>(StatusCodes.Status201Created)
+      .Produces(StatusCodes.Status400BadRequest);
     }
   }
 }

@@ -50,8 +50,11 @@ namespace SimplyBooks.Services
     public async Task<Book> CreateBookAsync(Book book)
     {
       return await _simplyBooksBookRepository.CreateBookAsync(book);
+    }
 
-
+    public async Task<Book> UpdateBookAsync(int id, Book book)
+    {
+      return await _simplyBooksBookRepository.UpdateBookAsync(id, book);
     }
   }
 }
