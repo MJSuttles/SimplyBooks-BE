@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.EntityFrameworkCore;
 using SimplyBooks.Data;
 using SimplyBooks.Interfaces;
@@ -74,5 +75,20 @@ namespace SimplyBooks.Repositories
     }
 
     // Delete a Book
+
+    public async Task<Book> DeleteBookAsync(int id)
+    {
+      var bookToDelete = await _context.Books
+        .SingleOrDefaultAsync(b => b.Id == id);
+
+      if (bookToDelete == null)
+      {
+        return null;
+      }
+      _context.Books.Remove(bookToDelete);
+      await _context.SaveChangesAsync();
+
+      return bookToDelete;
+    }
   }
 }

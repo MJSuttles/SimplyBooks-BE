@@ -52,15 +52,24 @@ namespace SimplyBooks.Endpoint
       .Produces<Book>(StatusCodes.Status201Created)
       .Produces<Book>(StatusCodes.Status400BadRequest);
 
-      group.MapPut("/{id}", async (ISimplyBooksBookRepository simplyBooksBookRepository, int id, Book book) =>
+      group.MapPut("/{id}", async (ISimplyBooksBookService simplyBooksBookService, int id, Book book) =>
       {
-        var updatedBook = await simplyBooksBookRepository.UpdateBookAsync(id, book);
+        var updatedBook = await simplyBooksBookService.UpdateBookAsync(id, book);
         return Results.Ok(updatedBook);
       })
       .WithName("UpdateBook")
       .WithOpenApi()
       .Produces<Book>(StatusCodes.Status201Created)
       .Produces(StatusCodes.Status400BadRequest);
+
+      group.MapDelete("/{id}", async (ISimplyBooksBookService simplyBooksBookService, int id) =>
+      {
+        var deletedBook = await simplyBooksBookService.DeleteBookAsync(id);
+        return Results.NoContent();
+      })
+      .WithName("DeletedBook")
+      .WithOpenApi()
+      .Produces<Book>(StatusCodes.Status204NoContent);
     }
   }
 }
