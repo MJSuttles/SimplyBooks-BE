@@ -20,9 +20,9 @@ namespace SimplyBooks.Endpoint
     {
       var group = routes.MapGroup("/api/authors").WithTags(nameof(Author));
 
-      group.MapGet("/", async (ISimplyBooksAuthorRepository simplyBooksAuthorRepository) =>
+      group.MapGet("/", async (ISimplyBooksAuthorService simplyBooksAuthorService) =>
       {
-        return await simplyBooksAuthorRepository.GetAllAuthorsAsync();
+        return await simplyBooksAuthorService.GetAllAuthorsAsync();
       })
       .WithName("GetAllAuthors")
       .WithOpenApi()

@@ -17,6 +17,12 @@ builder.Services.AddNpgsql<SimplyBooksDbContext>(builder.Configuration["SimplyBo
 // Set the JSON serializer options
 builder.Services.Configure<JsonOptions>(options => { options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });
 
+// Here we are registering the services and repositories with the DI container.
+// The DI container will inject the services and repositories into the endpoints (controllers).
+// DI (Dependency Injection) is a design pattern that allows us to develop loosely coupled code.
+// Loosely coupled code is code where the classes and objects are independent of each other.
+// This makes the code easier to maintain, test, and extend.
+
 builder.Services.AddScoped<ISimplyBooksAuthorRepository, SimplyBooksAuthorRepository>();
 builder.Services.AddScoped<ISimplyBooksAuthorService, SimplyBooksAuthorService>();
 builder.Services.AddScoped<ISimplyBooksBookRepository, SimplyBooksBookRepository>();
